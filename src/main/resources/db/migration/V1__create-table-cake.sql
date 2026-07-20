@@ -1,0 +1,11 @@
+
+ CREATE TABLE IF NOT EXISTS Cake (
+        id BIGINT NOT NULL AUTO_INCREMENT,
+        name VARCHAR(255) NOT NULL,
+        flavour VARCHAR(50) NOT NULL,
+        type VARCHAR(50) NOT NULL,
+        price DOUBLE PRECISION NOT NULL,
+
+        PRIMARY KEY(id)
+
+ );
