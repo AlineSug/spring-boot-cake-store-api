@@ -15,3 +15,7 @@ logging:
   level:
     org.springframework.boot.context.config: DEBUG
 
+api:
+  security:
+    token:
+      secret: ${JWT_SECRET}
