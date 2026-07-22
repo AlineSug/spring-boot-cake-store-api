@@ -1,69 +1,69 @@
-Spring-Boot-cake-store-api
+Spring Boot Cake Store API
+This project is a RESTful API built with Java and Spring Boot to strengthen my backend development skills and
+deepen my understanding of REST API design and security best practices.
+The application uses Spring Data JPA with MySQL for data persistence and 
+follows a layered architecture (Controller, Service, Repository, and DTO) to improve maintainability, scalability, and separation of concerns.
 
-The main purpose of this project is to practice and strengthen my knowledge in:
+*Features*
+-User registration and authentication
+-Password encryption using BCrypt
+-JWT (JSON Web Token) authentication for stateless sessions
+-Token expiration configured for enhanced security
+-Protected endpoints that require a valid JWT for access
+-Public access only to authentication and user registration endpoints
+-Full CRUD operations for cake management
 
-Backend development with Java and Spring Boot
-Building RESTful APIs
-Database integration with JPA and Hibernate
-Authentication and authorization using Spring Security
-Database migrations with Flyway
-Software design and clean code practices
-Git and GitHub workflow
+Cake Management
+Authenticated users can:
+Create new cakes
+View all registered cakes
+Update cake information
+Delete existing cakes
+Each cake contains the following attributes:
+Id Auto_incremented
+Name
+Flavor
+Type
+Price
 
-Current Status
 
-This project is being developed incrementally as part of my backend learning journey.
+*Technologies Used*
 
-Features implemented so far include:
-
-* User registration
-* User authentication structure
-*Spring Security configuration
-* Database integration with MySQL
-* Database versioning with Flyway
-
-Features currently in development:
-
-- JWT token generation
-- JWT authentication and authorization flow
-- Security filters for request validation
-- Protected endpoints based on user authentication
-- Additional API improvements and refactoring
+Java 17
+Spring Boot
+Spring Security
+JWT Authentication
+Spring Data JPA
+MySQL
+BCrypt
+Maven
 
 This project is intended for learning purposes and is being built step by step as I continue improving my backend development skills.
 New features, security enhancements, refactoring, and best practices will be implemented throughout the development process.
 
-プロジェクトの目的
 
-このプロジェクトでは、以下のスキル向上を目的としています。
+学習した知識を定着させるためには、実際に手を動かして開発することが大切だと考えています。
+そこで今回、Java と Spring Boot を使用して、Cake Store REST API を開発しました。
 
-Java と Spring Boot を用いたバックエンド開発
-REST API の設計・実装
-JPA・Hibernate を利用したデータベース連携
-Spring Security を利用した認証・認可
-Flyway を利用したデータベースマイグレーション
-ソフトウェア設計およびクリーンコードの実践
-Git / GitHub を活用した開発フロー
+*使用技術*
+Java 17
+Spring Boot
+Spring Security
+JWT認証
+Spring Data JPA
+MySQL
+BCrypt
 
-現在の開発状況
-
-このプロジェクトは、バックエンド開発の学習の一環として段階的に開発を進めています。
-
-現在実装済みの機能:
-
-*ユーザー登録
-* 認証機能の基本構造
-* Spring Security の設定
-* MySQL とのデータベース連携
-* Flyway によるデータベース管理
-
-現在実装中の機能:
-
-- JWT トークンの生成
-- JWT を利用した認証・認可フロー
-- リクエスト検証のためのセキュリティフィルター
-- 認証済みユーザー向けの保護エンドポイント
-- API の機能追加およびリファクタリング
+*実装した機能*
+・ユーザー登録およびログイン機能
+・JWTによる認証・認可機能
+・BCryptによるパスワードの暗号化
+・ケーキ情報のCRUD機能（登録・取得・更新・削除）
+・認証が必要なエンドポイントの保護
+ログインとユーザー登録以外のAPIは、JWTトークンによる認証が必要な構成にしています。
+また、Controller、Service、Repository、DTOのレイヤードアーキテクチャを採用し、保守性や拡張性を意識した設計を行いました。
+このプロジェクトを通して、REST API開発、データベース連携、認証・認可の仕組み、そしてバックエンド開発の実践的なスキルを学ぶことができました。
+現在も機能追加や改善を続けながら、Javaバックエンドエンジニアとして成長できるよう学習を続けています。
 
 
 本プロジェクトは学習目的で開発しており、バックエンド開発スキルの向上に合わせて段階的に機能を追加しています。
