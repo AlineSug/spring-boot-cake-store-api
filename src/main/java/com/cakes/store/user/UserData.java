@@ -15,4 +15,6 @@ public class UserData {
 
     @NotBlank
     private String password;
+
+    private Role role;
 }
