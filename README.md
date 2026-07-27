@@ -4,6 +4,9 @@ This project is a RESTful API built with Java and Spring Boot to strengthen my b
 deepen my understanding of REST API design and security best practices.
 The application uses Spring Data JPA with MySQL for data persistence and 
 follows a layered architecture (Controller, Service, Repository, and DTO) to improve maintainability, scalability, and separation of concerns.
+RBAC implemented on top of JWT authentication. 
+USER has read-only access (GET only), ADMIN has full access.
+New registrations are always created as USER (preventing privilege escalation), and an ADMIN can promote other users.
 
 --------------*Features*----------------
 
@@ -20,6 +23,8 @@ follows a layered architecture (Controller, Service, Repository, and DTO) to imp
 -Public access only to authentication and user registration endpoints
 
 -Full CRUD operations for cake management
+
+-RBAC Role Control Access
 
 
 ----------------Cake Management-----------------
@@ -104,10 +109,13 @@ BCrypt
 
 ・認証が必要なエンドポイントの保護
 
+. RBAC実装（ADMINとUSER)
+
 ログインとユーザー登録以外のAPIは、JWTトークンによる認証が必要な構成にしています。
 また、Controller、Service、Repository、DTOのレイヤードアーキテクチャを採用し、
 保守性や拡張性を意識した設計を行いました。
 このプロジェクトを通して、REST API開発、データベース連携、認証・認可の仕組み、
+JWT認証にRBACを実装。USERは読み取り専用(GETのみ)、ADMINは全操作可能。新規登録者は常にUSERとして作成され(権限昇格防止)、ADMINが他ユーザーを昇格できます。
 そしてバックエンド開発の実践的なスキルを学ぶことができました。
 現在も機能追加や改善を続けながら、Javaバックエンドエンジニアとして成長できるよう学習を続けています。
 
