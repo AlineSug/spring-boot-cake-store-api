@@ -1,5 +1,6 @@
 package com.cakes.store.cake;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import jakarta.validation.Validation;
 import jakarta.validation.constraints.NotNull;
@@ -17,6 +18,7 @@ import java.net.URI;
 @RestController
 @RequestMapping("/cakes")
 @AllArgsConstructor
+@SecurityRequirement(name = "bearer-key")
 
 public class CakeController {
 
