@@ -6,6 +6,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -17,9 +19,12 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class Filter extends OncePerRequestFilter {
 
+    private static final Logger log = LoggerFactory.getLogger(Filter.class);
     private final TokenService tokenService;
 
     private final UserRepository userRepository;
+
+    private final RevokedTokenRepository revokedTokenRepository;
 
 
     @Override
@@ -27,12 +32,21 @@ public class Filter extends OncePerRequestFilter {
 
         var token = getTheToken(request);
         if(token != null){
-            var userLogin = tokenService.getUserToken(token);
-            var user = userRepository.findByLogin(userLogin);
+            try {
+                var decoded = tokenService.verifyToken(token);
 
-            var authenticator = new UsernamePasswordAuthenticationToken(user,null, user.getAuthorities());
-
-            SecurityContextHolder.getContext().setAuthentication(authenticator);
+                boolean revoked = revokedTokenRepository.existsById(decoded.getId());
+                if(!revoked){
+                    var user = userRepository.findByLogin(decoded.getSubject());
+                    log.warn("User={} authorities={}", decoded.getSubject(), user.getAuthorities());
+                    var authenticator = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
+                    SecurityContextHolder.getContext().setAuthentication(authenticator);
+                }else {
+                    log.warn("Token with jti={} has in backlist (Revoked)", decoded.getId());
+                }
+            } catch (RuntimeException ex){
+                    log.warn("Error to Authenticate token:  {}", ex.getMessage(), ex);
+            }
         }
 
 

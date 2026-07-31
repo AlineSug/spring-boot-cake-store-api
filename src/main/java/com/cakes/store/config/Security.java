@@ -27,16 +27,19 @@ public class Security {
         http.csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         .requestMatchers("/v3/api-docs/**").permitAll()
                         .requestMatchers("/swagger-ui.html").permitAll()
                         .requestMatchers("/swagger-ui/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/login").permitAll()
                         .requestMatchers(HttpMethod.POST,"/users").permitAll()
+                        .requestMatchers(HttpMethod.POST,"/logout").hasAnyRole("ADMIN", "USER")
                         .requestMatchers(HttpMethod.GET, "/**").hasAnyRole("ADMIN", "USER")
                         .anyRequest().hasRole("ADMIN")
                 )
-                        .addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
-                return http.build();
+                .logout(logout -> logout.disable() )
+                .addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
+        return http.build();
     }
 
     @Bean
