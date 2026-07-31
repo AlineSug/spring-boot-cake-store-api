@@ -11,6 +11,9 @@ New registrations are always created as USER (preventing privilege escalation), 
 
 Implemented Swagger/OpenAPI to generate UI API documentation. This makes it easy to view available endpoints, test requests, and understand how the API works directly from the browser.
 
+Implemented JWT token revocation using a blacklist stored in the database.
+get the jti from token , on logout , that jti is saved to revoked table along expiration data, in every action request , Filter class check if there is this jti in the revoked table on database.
+if it does, the token is rejected.
 --------------*Features*----------------
 
 -User registration and authentication
@@ -127,6 +130,8 @@ JWT認証にRBACを実装。USERは読み取り専用(GETのみ)、ADMINは全�
 Swagger/OpenAPIによるAPIドキュメントを実装しました。
 REST APIのエンドポイントをブラウザ上で確認・テストできるインタラクティブな画面を提供し、リクエスト・レスポンスの構造や認証方法を分かりやすく可視化しています。
 現在も機能追加や改善を続けながら、Javaバックエンドエンジニアとして成長できるよう学習を続けています。
+
+このアプリはJWTトークンをブラックリスト方式で失効させます。トークン作成時に一意のID(jti)を付与し、ログアウト時にそのIDをrevoked テーブルに保存します。リクエストのたびに、そのIDがテーブルにあるか確認し、あれば拒否します。期限切れのIDは30分ごとに自動削除されます。
 
 
 本プロジェクトは学習目的で開発しており、バックエンド開発スキルの向上に合わせて段階的に機能を追加しています。
